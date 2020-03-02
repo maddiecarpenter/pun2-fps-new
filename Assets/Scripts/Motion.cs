@@ -109,7 +109,8 @@ public class Motion : MonoBehaviourPunCallbacks
 
         float ratio = (float)current_health / (float)max_health;
         //ui_healthBar.localScale = new Vector3(ration, 1, 1);
-        ui_healthBar.localScale = Vector3.Lerp(ui_healthBar.localScale, new Vector3(ratio, 1, 1), Time.deltaTime * 30f);
+        ui_healthBar.localScale = new Vector3(ratio, 1, 1);
+        //ui_healthBar.localScale = Vector3.Lerp(ui_healthBar.localScale, new Vector3(ratio, 1, 1), Time.deltaTime * 30f);
         GameObject.Find("Canvas/Hud/Health/Text").GetComponent<Text>().text = current_health + " / " + max_health;
 
     }
