@@ -8,6 +8,7 @@ public class GameManaging : MonoBehaviour
 {
     public GameObject wordBonusList;
     public string playerPrefab;
+ 
 
     public Transform []spawnPoints;
     Transform spawn;
@@ -16,11 +17,11 @@ public class GameManaging : MonoBehaviour
     private void Start()
     {
         menu.gameObject.SetActive(isActive);
-        spawn = spawnPoints[Random.Range(0, spawnPoints.Length)];
-
         //StartCoroutine(Spawn(3));
+        Spawn(3);
 
     }
+
 
     //public IEnumerator Spawn(int wait)
     //{
@@ -32,6 +33,8 @@ public class GameManaging : MonoBehaviour
 
     public void Spawn(int wait)
     {
+        spawn = spawnPoints[Random.Range(0, spawnPoints.Length)];
+
         Debug.Log("wating for revival");
         PhotonNetwork.Instantiate(playerPrefab, spawn.position, spawn.rotation);
     }

@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Pistol
   m_EditorClassIdentifier: 
   name: Pistol
-  damage: 100
+  damage: 20
   firerate: 9000
   aimSpeed: 20
-  ammo: 30
-  clipSize: 5
+  ammo: 50
+  clipSize: 10
   gunShot: {fileID: 8300000, guid: af42eca01139b4557ad333434915b658, type: 3}
   shotPitch: 0.1
   prefab: {fileID: 622854645985720286, guid: b0f92c520a8a642d09ffa026f093c7be, type: 3}

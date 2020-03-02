@@ -138,8 +138,6 @@ public class EnglishManager : MonoBehaviourPun
         explaination.text = words[currentIndex].Explaination;
         wordId = words[currentIndex].WordId;
         isFamiliar = words[currentIndex].IsFamiliar;
-
-
     }
 }
 

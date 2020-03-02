@@ -14,7 +14,6 @@ public class Motion : MonoBehaviourPunCallbacks
     private int current_health;
     private GameManaging manager;
     private Weapon weapon;
-
     private bool isProtected;
     private float defendTime;
     public void Start()
@@ -22,7 +21,6 @@ public class Motion : MonoBehaviourPunCallbacks
         weapon = GetComponent<Weapon>();
         manager = GameObject.Find("Manager").GetComponent<GameManaging>();
         current_health = max_health;
-
         camParent.SetActive(photonView.IsMine);
         if (!photonView.IsMine)
         {
@@ -40,6 +38,8 @@ public class Motion : MonoBehaviourPunCallbacks
             ui_healthBar = GameObject.Find("Hud/Health/Bar").transform;
             ui_ammo = GameObject.Find("Hud/Ammo/Text").GetComponent<Text>();
             RefreshBar();
+            Debug.Log("refresh");
+            Debug.Log("ratio is " + (float)current_health / (float)max_health);
         }
         isProtected = true;
         defendTime = 5;
@@ -75,7 +75,7 @@ public class Motion : MonoBehaviourPunCallbacks
         {
             return;
         }
-        //if (Input.GetKeyDown(KeyCode.U)) TakeDamage(50);
+        if (Input.GetKeyDown(KeyCode.U)) TakeDamage(20);
         if (isProtected)
         {
             defendTime -= Time.deltaTime;
@@ -88,8 +88,6 @@ public class Motion : MonoBehaviourPunCallbacks
 
         RefreshBar();
         weapon.RefreshAmmo(ui_ammo);
-
-
     }
 
     private void FixedUpdate()
@@ -104,7 +102,6 @@ public class Motion : MonoBehaviourPunCallbacks
         Vector3 vector3=new Vector3(hmove,0, vmove);
         vector3.Normalize();
         rig.velocity = transform.TransformDirection(vector3*speed*Time.deltaTime);
-
     }
 
     void RefreshBar()
@@ -112,7 +109,9 @@ public class Motion : MonoBehaviourPunCallbacks
 
         float ratio = (float)current_health / (float)max_health;
         //ui_healthBar.localScale = new Vector3(ration, 1, 1);
-        ui_healthBar.localScale = Vector3.Lerp(ui_healthBar.localScale, new Vector3(ratio, 1, 1), Time.deltaTime * 8f);
+        ui_healthBar.localScale = Vector3.Lerp(ui_healthBar.localScale, new Vector3(ratio, 1, 1), Time.deltaTime * 30f);
+        GameObject.Find("Canvas/Hud/Health/Text").GetComponent<Text>().text = current_health + " / " + max_health;
+
     }
 
     public void TakeDamage(int damage)
@@ -120,16 +119,33 @@ public class Motion : MonoBehaviourPunCallbacks
         if (photonView.IsMine)
         {
             Debug.Log("you are shooted by your enemy, damage= " + damage);
+
             current_health -= damage;
+            string info = "you are shooted by your enemy, damage= " + damage + ", current health " + current_health;
+            AlertText(info);
+
             Debug.Log("current_health: "+ current_health);
+            Debug.Log("ratio is " + (float)current_health / (float)max_health);
             RefreshBar();
-            //Debug.Log("current health is " + current_health);
             if (current_health <= 0)
             {
                 PhotonNetwork.Destroy(gameObject);
                 manager.Spawn(3);
             }
         }
+    }
+
+    public void AlertText(string info)
+    {
+        GameObject obj = Instantiate
+        (
+        (GameObject)Resources.Load("AlertText"),
+        //Vector3.zero, Quaternion.identity,
+        GameObject.Find("Canvas/Hud").transform
+        );
+        obj.GetComponentInChildren<Text>().text = info;
+        Destroy(obj,.3f);
+
     }
 
 }
