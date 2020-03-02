@@ -18,17 +18,24 @@ public class GameManaging : MonoBehaviour
         menu.gameObject.SetActive(isActive);
         spawn = spawnPoints[Random.Range(0, spawnPoints.Length)];
 
-        StartCoroutine(Spawn(3));
+        //StartCoroutine(Spawn(3));
 
     }
 
-    public IEnumerator Spawn(int wait)
+    //public IEnumerator Spawn(int wait)
+    //{
+    //    Debug.Log("wating for revival");
+    //    yield return new WaitForSeconds(wait);
+    //    spawn = spawnPoints[0];
+    //    PhotonNetwork.Instantiate(playerPrefab, spawn.position, spawn.rotation);
+    //}
+
+    public void Spawn(int wait)
     {
         Debug.Log("wating for revival");
-        yield return new WaitForSeconds(wait);
-        spawn = spawnPoints[0];
         PhotonNetwork.Instantiate(playerPrefab, spawn.position, spawn.rotation);
     }
+
 
     private void  Update()
     {
