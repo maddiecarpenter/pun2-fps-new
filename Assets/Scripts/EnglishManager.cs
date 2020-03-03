@@ -92,6 +92,11 @@ public class EnglishManager : MonoBehaviourPun
         Debug.Log("to excel");
     }
 
+    public void ImportExcel()
+    {
+        Debug.Log("create table in database");
+    }
+
     void onClick(string text)
      {
         switch (text)

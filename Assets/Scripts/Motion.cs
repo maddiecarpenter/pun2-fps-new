@@ -13,15 +13,18 @@ public class Motion : MonoBehaviourPunCallbacks
     private Rigidbody rig;
     private int current_health;
     private GameManaging manager;
+    public Text name;
     private Weapon weapon;
     private bool isProtected;
     private float defendTime;
+   
     public void Start()
     {
         weapon = GetComponent<Weapon>();
         manager = GameObject.Find("Manager").GetComponent<GameManaging>();
         current_health = max_health;
         camParent.SetActive(photonView.IsMine);
+        name.text = Launcher.name;
         if (!photonView.IsMine)
         {
             foreach (Transform tran in GetComponentsInChildren<Transform>())

@@ -9,7 +9,6 @@ public class GameManaging : MonoBehaviour
     public GameObject wordBonusList;
     public string playerPrefab;
  
-
     public Transform []spawnPoints;
     Transform spawn;
     public Transform menu;
@@ -37,6 +36,7 @@ public class GameManaging : MonoBehaviour
 
         Debug.Log("wating for revival");
         PhotonNetwork.Instantiate(playerPrefab, spawn.position, spawn.rotation);
+
     }
 
 

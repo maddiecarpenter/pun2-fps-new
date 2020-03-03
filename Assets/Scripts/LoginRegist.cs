@@ -1,9 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class LoginRegist 
 {
+
     Dbutil dbutil = new Dbutil();
 
     public void GetConn()
@@ -23,6 +25,10 @@ public class LoginRegist
 
     public int Regist(int pwd,string name)
     {
+        if (CheckUser(pwd.ToString(), name))
+        {
+            return 0;
+        }
         int result = 0;
         string sql = "insert into user(name,pwd) values(@name,@pwd)";
         if (pwd != 0 || name != null)
@@ -30,5 +36,12 @@ public class LoginRegist
             result = dbutil.Regist(sql, pwd, name);
         }
         return result;
+    }
+
+    public int GetId(string pwd, string name)
+    {
+        string sql = "select userId from user pwd=@pwd and name=@name";
+        dbutil.IsUser(sql, int.Parse(pwd), name);
+        return dbutil.mySqlDataReader.GetInt32("userId");
     }
 }

@@ -6,8 +6,10 @@ using UnityEngine.UI;
 public class Launcher : MonoBehaviourPunCallbacks
 {
     private LoginRegist loginRegist;
-    string name;
-    string pwd;
+    public static string name;
+    public static string pwd;
+    public Text txt;
+    List<int> userIdlist;
 
     public void Awake()
     {
@@ -19,7 +21,7 @@ public class Launcher : MonoBehaviourPunCallbacks
     {
         Debug.Log("CONNECTED TO MASTER!");
         base.OnConnectedToMaster();
-
+       
         Debug.Log("TRY TO JOIN ROOM");
         Join();
     }
@@ -50,9 +52,17 @@ public class Launcher : MonoBehaviourPunCallbacks
 
         if (loginRegist.CheckUser(pwd, name))
         {
-            Debug.Log("Trying to connect...");
-            PhotonNetwork.GameVersion = "0.0.0";
-            PhotonNetwork.ConnectUsingSettings();
+            if(userIdlist.Contains(loginRegist.GetId(pwd, name)))
+            {
+                txt.text = "user already login in";
+            }
+            else
+            {
+                Debug.Log("Trying to connect...");
+                PhotonNetwork.GameVersion = "0.0.0";
+                PhotonNetwork.ConnectUsingSettings();
+                userIdlist.Add(loginRegist.GetId(pwd, name));
+            }
         }
         else
         {
@@ -74,7 +84,8 @@ public class Launcher : MonoBehaviourPunCallbacks
         }
         else
         {
-            Debug.Log("user already in game database");
+            txt.text = "Alert: user already in game database";
+            txt.color = Color.red;
         }
         loginRegist.Close();
     }
