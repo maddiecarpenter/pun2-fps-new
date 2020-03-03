@@ -7,7 +7,6 @@ public class Gun :ScriptableObject
 {
     public string name;
     public int damage;
-    public float firerate;
     public float aimSpeed;
 
     public int ammo;
@@ -54,6 +53,8 @@ public class Gun :ScriptableObject
     }
 
     public int GetStash() { return stash; }
+    public void SetStash() { stash=ammo; }
 
     public int GetClip() { return clip; }
+    public void SetClip() { clip=clipSize; }
 }

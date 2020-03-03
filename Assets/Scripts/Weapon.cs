@@ -20,6 +20,8 @@ public class Weapon : MonoBehaviourPun
     private GameObject currentEquip;
     private bool isReloading;
 
+    
+
     private void Start()
     {
         foreach(Gun g in loadout)
@@ -38,7 +40,7 @@ public class Weapon : MonoBehaviourPun
 
         if (currentEquip != null)
         {
-            Aim((Input.GetMouseButton(0)));
+            Aim((Input.GetMouseButtonDown(0)));
 
             if (photonView.IsMine&& Input.GetKeyDown(KeyCode.J))
             {
@@ -52,6 +54,17 @@ public class Weapon : MonoBehaviourPun
                 photonView.RPC("ReloadRPC", RpcTarget.All);
             }
 
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "FillBullets")
+        {
+            Debug.Log("fill your bullets");
+            GameManaging.alertText.text="refill your bullets compelete";
+            loadout[currentIndex].SetClip();
+            loadout[currentIndex].SetStash();
         }
     }
 
@@ -93,6 +106,7 @@ public class Weapon : MonoBehaviourPun
     {
         if (currentEquip == null)
         {
+            GameManaging.alertText.text = "current equip is null";
             return;
         }
         Transform anchor = currentEquip.transform.Find("Anchor");
@@ -100,13 +114,13 @@ public class Weapon : MonoBehaviourPun
         Transform state_hip = currentEquip.transform.Find("States/Hip");
         if (isAiming)
         {
-            //Debug.Log("isAming.......");
-            anchor.position = Vector3.Lerp(anchor.position, state_ads.position, loadout[currentIndex].aimSpeed);
+            Debug.Log("isAming.......");
+            anchor.position = Vector3.Lerp(anchor.position, state_ads.position,Time.deltaTime * loadout[currentIndex].aimSpeed);
         }
         else
         {
-            //Debug.Log("not isAming.......");
-            anchor.position = Vector3.Lerp(anchor.position, state_hip.position, loadout[currentIndex].aimSpeed);
+            Debug.Log("not isAming.......");
+            anchor.position = Vector3.Lerp(anchor.position, state_hip.position,Time.deltaTime * loadout[currentIndex].aimSpeed);
         }
     }
 
@@ -153,9 +167,13 @@ public class Weapon : MonoBehaviourPun
                     //Debug.Log("hit your enemy, damage it");
                     //hit.collider.transform.root.gameObject.GetPhotonView().RPC("TakeDamage", RpcTarget.All, loadout[currentIndex].damage);
                     //send message to every machine
+                  //Debug.Log("hit.collider.GetComponent<Motion>().current_health is --" + hit.collider.GetComponent<Motion>().current_health);
+                    //if (hit.collider.GetComponent<Motion>().current_health <= 0)
+                    //{
+                        SpawnHealthBonus();
+                        SpawnWordBonus();
+                    //}
 
-                    SpawnHealthBonus();
-                    SpawnWordBonus();
                 }
                 if (hit.collider.gameObject.layer==10)//enemy
                 {
@@ -202,7 +220,7 @@ public class Weapon : MonoBehaviourPun
         obj.transform.Find("Canvas/spell").GetComponent<Text>().text = temp.Spell;
         obj.transform.Find("Canvas/explaination").GetComponent<Text>().text = temp.Explaination;
         Debug.Log("temp word is " + temp.Spell);
-        Destroy(obj, 3);
+        Destroy(obj, 5);
     }
 
 }

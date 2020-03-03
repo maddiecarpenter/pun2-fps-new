@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 public class GameManaging : MonoBehaviour
 {
+    public static Text alertText;
 
     public GameObject wordBonusList;
     public string playerPrefab;
@@ -16,6 +17,8 @@ public class GameManaging : MonoBehaviour
     private bool isActive = false;
     private void Start()
     {
+        alertText = GameObject.Find("Canvas/Hud/AlertText/AlertText").GetComponent<Text>();
+        alertText.text = "Alert info";
         menu.gameObject.SetActive(isActive);
         wordBonusList.SetActive(isActive);
         //StartCoroutine(Spawn(3));
@@ -27,7 +30,6 @@ public class GameManaging : MonoBehaviour
     {
         Debug.Log("spawn your player");
         spawn = spawnPoints[Random.Range(0, spawnPoints.Length)];
-        Debug.Log("wating for revival");
         PhotonNetwork.Instantiate(playerPrefab, spawn.position, spawn.rotation);
 
     }
@@ -52,5 +54,6 @@ public class GameManaging : MonoBehaviour
     {
         SceneManager.LoadScene(0);
     }
+
 
 }

@@ -113,7 +113,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0.46, y: 0.55}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &1376821505
@@ -292,7 +292,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 778853330108008637}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.46, y: 0.55, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5112633895811380479}
@@ -401,14 +401,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b49ce2c695cb441378f83d8c9a2b708c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthPrefab: {fileID: 6296310989665048935, guid: 96b1615fce46741ef927160d89ffaa33,
-    type: 3}
-  wordPrefab: {fileID: 3988390925281311032, guid: 89d694bb7c5834f0ab0bad6e0811e348,
-    type: 3}
-  alertTxt: {fileID: 0}
   speed: 500
   max_health: 100
   camParent: {fileID: 2337253370849050910}
+  current_health: 0
   name: {fileID: 387335494}
 --- !u!114 &8677510563911277918
 MonoBehaviour:
@@ -472,7 +468,7 @@ MonoBehaviour:
   OwnershipTransfer: 0
   ObservedComponents:
   - {fileID: 3854834188786022550}
-  viewIdField: 0
+  viewIdField: 1
   InstantiationId: 0
   isRuntimeInstantiated: 0
 --- !u!114 &3854834188786022550
@@ -654,7 +650,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6275933997326754599}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.46, y: 0.55, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3308791120762516717}
@@ -685,7 +681,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6539209994024403719}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.33, y: -0.543, z: -0.06}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3804928189959299468}

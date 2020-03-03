@@ -5,15 +5,14 @@ using Photon.Pun;
 using UnityEngine.UI;
 public class Motion : MonoBehaviourPunCallbacks
 {
-    public Text alertTxt;
-
+    private Text healthText;
     public float speed=200f;
     public int max_health;
     public GameObject camParent;
     private Transform ui_healthBar;
     private static Text ui_ammo;
     private Rigidbody rig;
-    private int current_health;
+    public int current_health;
     private GameManaging manager;
     public Text name;
     private Weapon weapon;
@@ -22,7 +21,7 @@ public class Motion : MonoBehaviourPunCallbacks
    
     public void Start()
     {
-        alertTxt= GameObject.Find("Canvas/Hud/Health/Text").GetComponent<Text>();
+        healthText = GameObject.Find("Canvas/Hud/Health/Text").GetComponent<Text>();
         weapon = GetComponent<Weapon>();
         manager = GameObject.Find("Manager").GetComponent<GameManaging>();
         current_health = max_health;
@@ -44,8 +43,6 @@ public class Motion : MonoBehaviourPunCallbacks
             ui_healthBar = GameObject.Find("Hud/Health/Bar").transform;
             ui_ammo = GameObject.Find("Hud/Ammo/Text").GetComponent<Text>();
             RefreshBar();
-            Debug.Log("refresh");
-            Debug.Log("ratio is " + (float)current_health / (float)max_health);
         }
         isProtected = true;
         defendTime = 5;
@@ -111,7 +108,6 @@ public class Motion : MonoBehaviourPunCallbacks
 
     void RefreshBar()
     {
-
         float ratio = (float)current_health / (float)max_health;
         //ui_healthBar.localScale = new Vector3(ration, 1, 1);
         ui_healthBar.localScale = new Vector3(ratio, 1, 1);
@@ -128,7 +124,7 @@ public class Motion : MonoBehaviourPunCallbacks
 
             current_health -= damage;
             string info = "you are shooted by your enemy, damage= " + damage + ", current health " + current_health;
-            AlertText(info);
+            GameManaging.alertText.text = info;
 
             Debug.Log("current_health: "+ current_health);
             Debug.Log("ratio is " + (float)current_health / (float)max_health);
@@ -142,19 +138,5 @@ public class Motion : MonoBehaviourPunCallbacks
             }
         }
     }
-
-    public void AlertText(string info)
-    {
-        GameObject obj = Instantiate
-        (
-        (GameObject)Resources.Load("AlertText"),
-        //Vector3.zero, Quaternion.identity,
-        GameObject.Find("Canvas/Hud").transform
-        );
-        obj.GetComponentInChildren<Text>().text = info;
-        Destroy(obj,.5f);
-
-    }
-
 
 }
