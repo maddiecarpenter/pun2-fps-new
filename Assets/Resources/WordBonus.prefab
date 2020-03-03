@@ -166,6 +166,7 @@ GameObject:
   - component: {fileID: 2047738022391605392}
   - component: {fileID: -7140473660682359079}
   - component: {fileID: 4375276357370245945}
+  - component: {fileID: 7365402705832960871}
   m_Layer: 0
   m_Name: WordBonus
   m_TagString: WordBonus
@@ -239,6 +240,18 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7365402705832960871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3988390925281311032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19d98ca4ffb74a809445452fc1d09bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4759920596627542672
 GameObject:
   m_ObjectHideFlags: 0

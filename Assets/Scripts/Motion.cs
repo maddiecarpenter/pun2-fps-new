@@ -56,7 +56,7 @@ public class Motion : MonoBehaviourPunCallbacks
         {
             if(current_health<=max_health-10)
                 current_health += 10;
-            Destroy(other.gameObject);
+            other.transform.root.gameObject.GetPhotonView().RPC("DestroyAuto", RpcTarget.All);
             Debug.Log("add health");
         }
         if (other.gameObject.tag == "WordBonus")
@@ -69,8 +69,8 @@ public class Motion : MonoBehaviourPunCallbacks
             tempWord.Explaination = other.transform.Find("Canvas/explaination").GetComponent<Text>().text;
 
             WordGenerator.list.Add(tempWord);
-            
-            Destroy(other.gameObject);
+
+            other.transform.root.gameObject.GetPhotonView().RPC("DestroyAuto", RpcTarget.All);
         }
     }
 
@@ -135,8 +135,8 @@ public class Motion : MonoBehaviourPunCallbacks
             RefreshBar();
             if (current_health <= 0)
             {
-                SpawnWordBonus();
-                SpawnHealthBonus();
+                photonView.RPC("SpawnWordBonus", RpcTarget.All);
+                photonView.RPC("SpawnHealthBonus", RpcTarget.All);
                 PhotonNetwork.Destroy(gameObject);
                 manager.Spawn(3);
             }
@@ -155,22 +155,25 @@ public class Motion : MonoBehaviourPunCallbacks
         Destroy(obj,.3f);
 
     }
-
+    [PunRPC]
     public void SpawnHealthBonus()
     {
-        Debug.Log("spawn.......");
-        Instantiate(healthPrefab, gameObject.transform.position, Quaternion.identity);
+        Debug.Log("SpawnHealthBonus.......");
+        PhotonNetwork.Instantiate(healthPrefab.name, gameObject.transform.position, Quaternion.identity);
     }
-
+    [PunRPC]
     public void SpawnWordBonus()
     {
+        Debug.Log("SpawnWordBonus.......");
+
         Vector3 randPos = new Vector3(Random.Range(0, 3), Random.Range(0, 3), Random.Range(0, 3));
-        GameObject obj = Instantiate(wordPrefab, gameObject.transform.position + randPos, Quaternion.identity);
+        GameObject obj =PhotonNetwork.Instantiate(wordPrefab.name, gameObject.transform.position + randPos, Quaternion.identity);
         Word temp = WordGenerator.GetSingleWord();
 
         obj.transform.Find("Canvas/wordId").GetComponent<Text>().text = temp.WordId.ToString();
         obj.transform.Find("Canvas/spell").GetComponent<Text>().text = temp.Spell;
         obj.transform.Find("Canvas/explaination").GetComponent<Text>().text = temp.Explaination;
+        Debug.Log("temp word is " + temp.Spell);
     }
 
 }

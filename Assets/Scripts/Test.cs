@@ -5,9 +5,7 @@ using UnityEngine;
 public class Test : MonoBehaviour
 {
     public IEnumerator SendGet(string url)
-
     {
-
         WWW www = new WWW(url);
 
         yield return www;
@@ -15,15 +13,12 @@ public class Test : MonoBehaviour
         if (string.IsNullOrEmpty(www.error))
 
         {
-
             //GetComponent<AudioSource>().material.SetTexture("_MainTex", www.texture);
 
             //GetComponent<AudioSource>().clip = www.GetAudioClip(true, true, AudioType.MPEG);
             GetComponent<AudioSource>().clip = NAudioPlayer.FromMp3Data(www.bytes);
 
-
             GetComponent<AudioSource>().Play();
-
         }
 
 

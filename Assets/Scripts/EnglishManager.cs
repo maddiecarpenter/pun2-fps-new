@@ -20,6 +20,7 @@ public class EnglishManager : MonoBehaviourPun
     string sentenceCH;
     string sentenceEN;
     int currentIndex;
+    string pronouncationURL;
     int score=0;
     int userId;
     string sql;
@@ -38,6 +39,14 @@ public class EnglishManager : MonoBehaviourPun
         isFamiliar = words[0].IsFamiliar;
         sentenceCH = words[0].SentenceCH;
         sentenceEN = words[0].SentenceEN;
+        pronouncationURL = words[0].PronouncationURL;
+        Debug.Log(pronouncationURL);
+
+
+        //string urlMusic = "https://dictionary.blob.core.chinacloudapi.cn/media/audio/tom/ff/3c/FF3CF25481BE36DB7AB71852E96E9937.mp3";
+        //string urlMusic = pronouncationURL;
+
+        //StartCoroutine(SendGet(urlMusic));
 
 
         currentIndex = 0;
@@ -143,6 +152,40 @@ public class EnglishManager : MonoBehaviourPun
         explaination.text = words[currentIndex].Explaination;
         wordId = words[currentIndex].WordId;
         isFamiliar = words[currentIndex].IsFamiliar;
+        pronouncationURL = words[currentIndex].PronouncationURL;
+        Debug.Log(pronouncationURL);
+
+        //string urlMusic = "https://dictionary.blob.core.chinacloudapi.cn/media/audio/tom/ff/3c/FF3CF25481BE36DB7AB71852E96E9937.mp3";
+        //string urlMusic = pronouncationURL;
+
+        //StartCoroutine(SendGet(urlMusic));
+    }
+
+
+    public IEnumerator SendGet(string url)
+    {
+        WWW www = new WWW(url);
+
+        yield return www;
+
+        if (string.IsNullOrEmpty(www.error))
+
+        {
+            //GetComponent<AudioSource>().material.SetTexture("_MainTex", www.texture);
+
+            //GetComponent<AudioSource>().clip = www.GetAudioClip(true, true, AudioType.MPEG);
+            GetComponent<AudioSource>().clip = NAudioPlayer.FromMp3Data(www.bytes);
+
+            GetComponent<AudioSource>().Play();
+        }
+
+
+        //WWW www = new WWW(musicUrl);
+        //while (!www.isDone)
+        //{
+        //    yield return 0;
+        //}
+        //GetComponent<AudioSource>().clip = NAudioPlayer.FromMp3Data(www.bytes);
     }
 }
 
