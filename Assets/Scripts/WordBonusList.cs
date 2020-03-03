@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class WordBonusList : MonoBehaviour
 {
-    GameObject parentObj;//content
+    public GameObject parentObj;//content
     Word[] words;
     //private void Start()
     //{
@@ -27,11 +27,10 @@ public class WordBonusList : MonoBehaviour
         //www.Spell = "www";
         //www.Explaination = "www";
         //WordGenerator.list.Add(www);
-        parentObj = (GameObject)Resources.Load("Content");
-        Instantiate(parentObj, Vector3.zero, Quaternion.identity);
+
         for (int i = parentObj.transform.childCount - 1; i >= 0; i--)
         {
-            Destroy(parentObj.transform.GetChild(i));
+            Destroy(parentObj.transform.GetChild(i).gameObject);
         }
 
         words = WordGenerator.list.ToArray();
@@ -45,6 +44,8 @@ public class WordBonusList : MonoBehaviour
             prefabInstance.transform.localScale = new Vector3(1, 1, 1);
         }
     }
+
+
 
     public void DeleteWord()
     {
@@ -78,10 +79,9 @@ public class WordBonusList : MonoBehaviour
         {
             if (obj[i].GetComponent<Toggle>().isOn)
             {
-                Destroy(obj[i].transform);
+                Destroy(obj[i].transform.gameObject);
             }
         }
-        Destroy(parentObj);
         UpdateListWord();
         //Debug.Log(str.Length);
         //Debug.Log(str[0].text);

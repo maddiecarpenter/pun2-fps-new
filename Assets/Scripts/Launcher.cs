@@ -9,7 +9,7 @@ public class Launcher : MonoBehaviourPunCallbacks
     public static string name;
     public static string pwd;
     public Text txt;
-    List<int> userIdlist;
+    public static List<int> userIdlist;
 
     public void Awake()
     {
@@ -52,17 +52,17 @@ public class Launcher : MonoBehaviourPunCallbacks
 
         if (loginRegist.CheckUser(pwd, name))
         {
-            if(userIdlist.Contains(loginRegist.GetId(pwd, name)))
-            {
-                txt.text = "user already login in";
-            }
-            else
-            {
+            //if(userIdlist.Contains(loginRegist.GetId(pwd, name)))
+            //{
+            //    txt.text = "user already login in";
+            //}
+            //else
+            //{
                 Debug.Log("Trying to connect...");
                 PhotonNetwork.GameVersion = "0.0.0";
                 PhotonNetwork.ConnectUsingSettings();
-                userIdlist.Add(loginRegist.GetId(pwd, name));
-            }
+                //userIdlist.Add(loginRegist.GetId(pwd, name));
+            //}
         }
         else
         {

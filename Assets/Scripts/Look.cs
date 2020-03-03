@@ -6,7 +6,6 @@ using Photon.Pun;
 
 public class Look : MonoBehaviourPun
 {
-    public static bool cursorLocked=true;
     public Transform player;//transform whole player
     public Transform normalCam;//transform the camera
     public Transform weapon;
@@ -28,7 +27,6 @@ public class Look : MonoBehaviourPun
         }
         SetY();
         SetX();
-        UpdateCursor();
     }
 
     void SetY()
@@ -50,31 +48,6 @@ public class Look : MonoBehaviourPun
         Quaternion t_adj = Quaternion.AngleAxis(t_input, Vector3.up);
         Quaternion t_delta = player.localRotation * t_adj;//cannot add ,must multiplay
         player.localRotation = t_delta;
-    }
-
-    void UpdateCursor()
-    {
-        if (cursorLocked)
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                cursorLocked = false;
-            }
-        }
-        else
-        {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                cursorLocked = true;
-            }
-        }
-
     }
 
 }

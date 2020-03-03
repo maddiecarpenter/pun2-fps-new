@@ -16,24 +16,15 @@ public class GameManaging : MonoBehaviour
     private void Start()
     {
         menu.gameObject.SetActive(isActive);
+        wordBonusList.SetActive(isActive);
         //StartCoroutine(Spawn(3));
         Spawn(3);
 
     }
 
-
-    //public IEnumerator Spawn(int wait)
-    //{
-    //    Debug.Log("wating for revival");
-    //    yield return new WaitForSeconds(wait);
-    //    spawn = spawnPoints[0];
-    //    PhotonNetwork.Instantiate(playerPrefab, spawn.position, spawn.rotation);
-    //}
-
     public void Spawn(int wait)
     {
         spawn = spawnPoints[Random.Range(0, spawnPoints.Length)];
-
         Debug.Log("wating for revival");
         PhotonNetwork.Instantiate(playerPrefab, spawn.position, spawn.rotation);
 
@@ -46,6 +37,7 @@ public class GameManaging : MonoBehaviour
         {
             isActive = !isActive;
             menu.gameObject.SetActive(isActive);
+            wordBonusList.SetActive(isActive);
         }
     }
 

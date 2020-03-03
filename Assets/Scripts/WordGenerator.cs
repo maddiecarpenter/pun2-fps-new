@@ -52,6 +52,7 @@ public class WordGenerator : MonoBehaviour {
             dbutil.mySqlDataReader.GetInt32("isFamiliar")
             );
             //list.Add(words[i]);
+            
         }
         
         dbutil.Close();

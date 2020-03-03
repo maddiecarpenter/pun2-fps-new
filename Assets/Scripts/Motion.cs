@@ -5,6 +5,8 @@ using Photon.Pun;
 using UnityEngine.UI;
 public class Motion : MonoBehaviourPunCallbacks
 {
+    public GameObject healthPrefab;
+    public GameObject wordPrefab;
     public float speed=200f;
     public int max_health;
     public GameObject camParent;
@@ -133,6 +135,8 @@ public class Motion : MonoBehaviourPunCallbacks
             RefreshBar();
             if (current_health <= 0)
             {
+                SpawnWordBonus();
+                SpawnHealthBonus();
                 PhotonNetwork.Destroy(gameObject);
                 manager.Spawn(3);
             }
@@ -150,6 +154,23 @@ public class Motion : MonoBehaviourPunCallbacks
         obj.GetComponentInChildren<Text>().text = info;
         Destroy(obj,.3f);
 
+    }
+
+    public void SpawnHealthBonus()
+    {
+        Debug.Log("spawn.......");
+        Instantiate(healthPrefab, gameObject.transform.position, Quaternion.identity);
+    }
+
+    public void SpawnWordBonus()
+    {
+        Vector3 randPos = new Vector3(Random.Range(0, 3), Random.Range(0, 3), Random.Range(0, 3));
+        GameObject obj = Instantiate(wordPrefab, gameObject.transform.position + randPos, Quaternion.identity);
+        Word temp = WordGenerator.GetSingleWord();
+
+        obj.transform.Find("Canvas/wordId").GetComponent<Text>().text = temp.WordId.ToString();
+        obj.transform.Find("Canvas/spell").GetComponent<Text>().text = temp.Spell;
+        obj.transform.Find("Canvas/explaination").GetComponent<Text>().text = temp.Explaination;
     }
 
 }

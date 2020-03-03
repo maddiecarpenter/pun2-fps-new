@@ -38,10 +38,10 @@ public class LoginRegist
         return result;
     }
 
-    public int GetId(string pwd, string name)
-    {
-        string sql = "select userId from user pwd=@pwd and name=@name";
-        dbutil.IsUser(sql, int.Parse(pwd), name);
-        return dbutil.mySqlDataReader.GetInt32("userId");
-    }
+    //public int GetId(string pwd, string name)
+    //{
+        //string sql = "select userId from user pwd=@pwd and name=@name";
+        //dbutil.IsUser(sql, int.Parse(pwd), name);
+        //return dbutil.mySqlDataReader.GetInt32("userId");
+    //}
 }
