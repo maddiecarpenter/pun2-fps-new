@@ -5,6 +5,9 @@ using UnityEngine.UI;
 using Photon.Pun;
 public class Weapon : MonoBehaviourPun
 {
+    public GameObject healthPrefab;
+    public GameObject wordPrefab;
+    RaycastHit hit;
     public Gun[] loadout;
     //public GameObject[] loadout;
     public Transform weaponParent;
@@ -132,12 +135,13 @@ public class Weapon : MonoBehaviourPun
     void Shoot()
     {
         Transform spawn = transform.Find("Body/Eyes/Camera");
-        RaycastHit hit = new RaycastHit();
+        hit = new RaycastHit();
         if(Physics.Raycast(spawn.position,spawn.forward,out hit, 1000f, canbeShoot))
         {
             GameObject newHole =Instantiate(bulletPrefab, hit.point + hit.normal * 0.004f, Quaternion.identity);
             newHole.transform.LookAt(hit.normal);
             Destroy(newHole, 0.5f);
+           
             //Debug.Log(hit.collider.gameObject.layer);
             //Debug.Log(hit.collider.gameObject.name);
             if (photonView.IsMine)
@@ -149,8 +153,11 @@ public class Weapon : MonoBehaviourPun
                     //Debug.Log("hit your enemy, damage it");
                     //hit.collider.transform.root.gameObject.GetPhotonView().RPC("TakeDamage", RpcTarget.All, loadout[currentIndex].damage);
                     //send message to every machine
+
+                    SpawnHealthBonus();
+                    SpawnWordBonus();
                 }
-                if(hit.collider.gameObject.layer==10)//enemy
+                if (hit.collider.gameObject.layer==10)//enemy
                 {
                     Debug.Log("hit layer 10");
                     PhotonNetwork.Destroy(hit.collider.gameObject);
@@ -177,4 +184,25 @@ public class Weapon : MonoBehaviourPun
         GetComponent<Motion>().TakeDamage(damage);
         //then get Motion component,call it's public method
     }
+
+
+    public void SpawnHealthBonus()
+    {
+        GameObject obj= Instantiate(healthPrefab, hit.collider.gameObject.transform.position, Quaternion.identity);
+        Destroy(obj, 3);
+    }
+
+    public void SpawnWordBonus()
+    {
+        Vector3 randPos = new Vector3(Random.Range(0, 2), Random.Range(0, 2), Random.Range(0, 2));
+        GameObject obj = Instantiate(wordPrefab, hit.collider.gameObject.transform.position + randPos, Quaternion.identity);
+        Word temp = WordGenerator.GetSingleWord();
+
+        obj.transform.Find("Canvas/wordId").GetComponent<Text>().text = temp.WordId.ToString();
+        obj.transform.Find("Canvas/spell").GetComponent<Text>().text = temp.Spell;
+        obj.transform.Find("Canvas/explaination").GetComponent<Text>().text = temp.Explaination;
+        Debug.Log("temp word is " + temp.Spell);
+        Destroy(obj, 3);
+    }
+
 }

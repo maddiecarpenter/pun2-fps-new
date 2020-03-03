@@ -405,6 +405,7 @@ MonoBehaviour:
     type: 3}
   wordPrefab: {fileID: 3988390925281311032, guid: 89d694bb7c5834f0ab0bad6e0811e348,
     type: 3}
+  alertTxt: {fileID: 0}
   speed: 500
   max_health: 100
   camParent: {fileID: 2337253370849050910}
@@ -439,6 +440,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24fb89d23637f486f8d317cd5d3246db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthPrefab: {fileID: 6296310989665048935, guid: 96b1615fce46741ef927160d89ffaa33,
+    type: 3}
+  wordPrefab: {fileID: 3988390925281311032, guid: 89d694bb7c5834f0ab0bad6e0811e348,
+    type: 3}
   loadout:
   - {fileID: 11400000, guid: 66bc7fb777af64172a562e6b76f3d065, type: 2}
   weaponParent: {fileID: 3548950230433326967}

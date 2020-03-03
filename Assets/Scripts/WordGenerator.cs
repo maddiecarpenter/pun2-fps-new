@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class WordGenerator : MonoBehaviour {
-    public int numWords = 2;
     private static string[] wordList = new string[40];//for fps
     public static List<Word> list=new List<Word>();
     private static Word[] words = new Word[40];
@@ -27,8 +26,9 @@ public class WordGenerator : MonoBehaviour {
     private void Start()
     {
         GetFromMyql();
+
     }
-    
+
     public void GetFromMyql()
     {
         //string connectStr = "server=127.0.0.1;port=3306;database=vocab;user=root;password=root";

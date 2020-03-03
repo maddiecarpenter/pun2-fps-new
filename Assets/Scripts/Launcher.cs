@@ -45,31 +45,35 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     public void Connect()
     {
-        loginRegist = new LoginRegist();
-        loginRegist.GetConn();
-        name = GameObject.Find("Menu/name/name").GetComponent<Text>().text;
-        pwd = GameObject.Find("Menu/pwd/pwd").GetComponent<Text>().text;
+        //loginRegist = new LoginRegist();
+        //loginRegist.GetConn();
+        //name = GameObject.Find("Menu/name/name").GetComponent<Text>().text;
+        //pwd = GameObject.Find("Menu/pwd/pwd").GetComponent<Text>().text;
 
-        if (loginRegist.CheckUser(pwd, name))
-        {
-            //if(userIdlist.Contains(loginRegist.GetId(pwd, name)))
-            //{
-            //    txt.text = "user already login in";
-            //}
-            //else
-            //{
-                Debug.Log("Trying to connect...");
-                PhotonNetwork.GameVersion = "0.0.0";
-                PhotonNetwork.ConnectUsingSettings();
-                //userIdlist.Add(loginRegist.GetId(pwd, name));
-            //}
-        }
-        else
-        {
-            Debug.Log("user dont exit");
-            Debug.Log("regist your account");
-        }
-        loginRegist.Close();
+        //if (loginRegist.CheckUser(pwd, name))
+        //{
+        //    //if(userIdlist.Contains(loginRegist.GetId(pwd, name)))
+        //    //{
+        //    //    txt.text = "user already login in";
+        //    //}
+        //    //else
+        //    //{
+        //        Debug.Log("Trying to connect...");
+        //        PhotonNetwork.GameVersion = "0.0.0";
+        //        PhotonNetwork.ConnectUsingSettings();
+        //        //userIdlist.Add(loginRegist.GetId(pwd, name));
+        //    //}
+        //}
+        //else
+        //{
+        //    Debug.Log("user dont exit");
+        //    Debug.Log("regist your account");
+        //}
+        //loginRegist.Close();
+
+        Debug.Log("Trying to connect...");
+        PhotonNetwork.GameVersion = "0.0.0";
+        PhotonNetwork.ConnectUsingSettings();
     }
 
     public void Regist()

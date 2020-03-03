@@ -5,8 +5,8 @@ using Photon.Pun;
 using UnityEngine.UI;
 public class Motion : MonoBehaviourPunCallbacks
 {
-    public GameObject healthPrefab;
-    public GameObject wordPrefab;
+    public Text alertTxt;
+
     public float speed=200f;
     public int max_health;
     public GameObject camParent;
@@ -22,6 +22,7 @@ public class Motion : MonoBehaviourPunCallbacks
    
     public void Start()
     {
+        alertTxt= GameObject.Find("Canvas/Hud/Health/Text").GetComponent<Text>();
         weapon = GetComponent<Weapon>();
         manager = GameObject.Find("Manager").GetComponent<GameManaging>();
         current_health = max_health;
@@ -56,7 +57,7 @@ public class Motion : MonoBehaviourPunCallbacks
         {
             if(current_health<=max_health-10)
                 current_health += 10;
-            other.transform.root.gameObject.GetPhotonView().RPC("DestroyAuto", RpcTarget.All);
+            Destroy(other.gameObject);
             Debug.Log("add health");
         }
         if (other.gameObject.tag == "WordBonus")
@@ -70,7 +71,6 @@ public class Motion : MonoBehaviourPunCallbacks
 
             WordGenerator.list.Add(tempWord);
 
-            other.transform.root.gameObject.GetPhotonView().RPC("DestroyAuto", RpcTarget.All);
         }
     }
 
@@ -135,8 +135,8 @@ public class Motion : MonoBehaviourPunCallbacks
             RefreshBar();
             if (current_health <= 0)
             {
-                photonView.RPC("SpawnWordBonus", RpcTarget.All);
-                photonView.RPC("SpawnHealthBonus", RpcTarget.All);
+                //photonView.RPC("SpawnWordBonus", RpcTarget.All);
+                //photonView.RPC("SpawnHealthBonus", RpcTarget.All);
                 PhotonNetwork.Destroy(gameObject);
                 manager.Spawn(3);
             }
@@ -152,28 +152,9 @@ public class Motion : MonoBehaviourPunCallbacks
         GameObject.Find("Canvas/Hud").transform
         );
         obj.GetComponentInChildren<Text>().text = info;
-        Destroy(obj,.3f);
+        Destroy(obj,.5f);
 
     }
-    [PunRPC]
-    public void SpawnHealthBonus()
-    {
-        Debug.Log("SpawnHealthBonus.......");
-        PhotonNetwork.Instantiate(healthPrefab.name, gameObject.transform.position, Quaternion.identity);
-    }
-    [PunRPC]
-    public void SpawnWordBonus()
-    {
-        Debug.Log("SpawnWordBonus.......");
 
-        Vector3 randPos = new Vector3(Random.Range(0, 3), Random.Range(0, 3), Random.Range(0, 3));
-        GameObject obj =PhotonNetwork.Instantiate(wordPrefab.name, gameObject.transform.position + randPos, Quaternion.identity);
-        Word temp = WordGenerator.GetSingleWord();
-
-        obj.transform.Find("Canvas/wordId").GetComponent<Text>().text = temp.WordId.ToString();
-        obj.transform.Find("Canvas/spell").GetComponent<Text>().text = temp.Spell;
-        obj.transform.Find("Canvas/explaination").GetComponent<Text>().text = temp.Explaination;
-        Debug.Log("temp word is " + temp.Spell);
-    }
 
 }
