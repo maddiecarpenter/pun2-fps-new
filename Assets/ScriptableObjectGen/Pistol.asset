@@ -19,5 +19,5 @@ MonoBehaviour:
   clipSize: 10
   gunShot: {fileID: 8300000, guid: af42eca01139b4557ad333434915b658, type: 3}
   shotPitch: 0.1
-  prefab: {fileID: 622854645985720286, guid: b0f92c520a8a642d09ffa026f093c7be, type: 3}
+  prefab: {fileID: 4276487226965434840, guid: 30b80504c3c6a4e3abfbf07e317faf52, type: 3}
   reloadTime: 1
