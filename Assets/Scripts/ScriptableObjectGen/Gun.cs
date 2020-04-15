@@ -15,7 +15,7 @@ public class Gun :ScriptableObject
     public AudioClip gunShot;
     public float shotPitch;
 
-    private int stash;//current ammo
+    private int stash;//all bullets
     private int clip;//current clip
 
     public GameObject prefab;
@@ -36,20 +36,18 @@ public class Gun :ScriptableObject
         }
         else 
         {
-            //Debug.Log("no bullets in current stash,reload your gun");
             return false; 
         }
     }
-
+    //比如说 ammo=50,clipSize=10
+    //stash=50,clip=10
+    //第一次 reload 发生之前，stash=50,clip=0
+    //stash=10;clip=10
     public void Reload()
     {
-        //Debug.Log("before stash is " + stash);
         stash += clip;
         clip = Mathf.Min(clipSize, stash);
         stash -= clip;
-        //Debug.Log("reload!!");
-        //Debug.Log("current stash is " + stash);
-        //Debug.Log("clip is " + clip);
     }
 
     public int GetStash() { return stash; }

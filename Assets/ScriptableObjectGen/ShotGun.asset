@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 211efcc34bae246b8a319b9692781429, type: 3}
+  m_Name: ShotGun
+  m_EditorClassIdentifier: 
+  name: ShutGun
+  damage: 40
+  aimSpeed: 20
+  ammo: 50
+  clipSize: 5
+  gunShot: {fileID: 8300000, guid: 25d834f030ee84220bbdddd4820b237a, type: 3}
+  shotPitch: 0.8
+  prefab: {fileID: 6135946127676352368, guid: eaad4abb379504aa082bc0bebb848b02, type: 3}
+  reloadTime: 1

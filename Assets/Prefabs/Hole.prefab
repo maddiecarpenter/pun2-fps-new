@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1829807347653999988}
   - component: {fileID: 2656797252791109706}
   - component: {fileID: 5999456333990635006}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102,9 +102,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3190896646457724496}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Hole
-  m_TagString: Untagged
+  m_TagString: bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

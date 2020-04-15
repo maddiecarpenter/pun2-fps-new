@@ -189,6 +189,7 @@ GameObject:
   - component: {fileID: -2503545523332182566}
   - component: {fileID: -7851312755687082085}
   - component: {fileID: 2286242927451426157}
+  - component: {fileID: 4235659929937291622}
   m_Layer: 0
   m_Name: HealthBonus
   m_TagString: HealthBonus
@@ -259,10 +260,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.9660332
-  m_Height: 1.9320664
+  m_Radius: 1.0980821
+  m_Height: 2.1961641
   m_Direction: 1
-  m_Center: {x: 0.2246635, y: 0, z: 0}
+  m_Center: {x: 0.09261445, y: 0, z: 0}
 --- !u!114 &2286242927451426157
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -275,6 +276,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e19d98ca4ffb74a809445452fc1d09bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!54 &4235659929937291622
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6296310989665048935}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
 --- !u!1 &6551410500575660815
 GameObject:
   m_ObjectHideFlags: 0
